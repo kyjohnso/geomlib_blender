@@ -4,7 +4,7 @@ import numpy as np
 import bpy
 import mathutils
 
-def create_3d_ellipsoid_from_covariance(covariance,factor=1):
+def create_3d_ellipsoid_from_covariance(covariance,subdivisions=2,factor=1):
     """
     Creates a blender 3d ellipsoid from a 3d covariance matrix rotating and scaling
     it in the scene appropriately.
@@ -16,11 +16,11 @@ def create_3d_ellipsoid_from_covariance(covariance,factor=1):
     val, vec = np.linalg.eig(covariance)
 
     mat = np.eye(4)
-    mat[:3,:3] = vec*np.sqrt(val[np.newaxis,:])
+    mat[:3,:3] = vec*np.sqrt(val[np.newaxis,:])*factor
     mat = mathutils.Matrix(mat)
 
     bpy.ops.mesh.primitive_ico_sphere_add(
-        subdivisions=4,
+        subdivisions=3,
         radius=1,
         enter_editmode=False,
         align="WORLD",
