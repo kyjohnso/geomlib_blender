@@ -3,5 +3,4 @@ name = "geomlib_blender"
 version = "0.1.0"
 dependencies = [
     "numpy",
-    "bpy",
 ]
